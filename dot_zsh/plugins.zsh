@@ -24,9 +24,20 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 # ----------------------------------------------------------------------------
 # Initialize Zsh Completion System
 # ----------------------------------------------------------------------------
+# Add custom completions directory to fpath
+fpath=(~/.zsh/completions $fpath)
+
 # Must be called before using any completions
 autoload -Uz compinit
 compinit
+
+# ----------------------------------------------------------------------------
+# Additional Completions
+# ----------------------------------------------------------------------------
+# Generate chezmoi completions
+if command -v chezmoi &>/dev/null; then
+    eval "$(chezmoi completion zsh)"
+fi
 
 # Enable Zinit completion support
 autoload -Uz _zinit
@@ -50,9 +61,13 @@ zinit light-mode for \
 # Load Plugins
 # ----------------------------------------------------------------------------
 # IMPORTANT: Load order matters!
-# 1. fzf-tab must be loaded after fzf (handled in fzf.zsh)
-# 2. zsh-autosuggestions provides inline command suggestions
-# 3. fast-syntax-highlighting MUST be loaded last for proper highlighting
+# 1. zsh-completions must be loaded early to add completions to fpath
+# 2. fzf-tab must be loaded after fzf (handled in fzf.zsh)
+# 3. zsh-autosuggestions provides inline command suggestions
+# 4. fast-syntax-highlighting MUST be loaded last for proper highlighting
+
+# Additional completion definitions for Zsh
+zinit light zsh-users/zsh-completions
 
 # Provides inline suggestions based on your command history
 # Press → (right arrow) to accept suggestions

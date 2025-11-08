@@ -1,6 +1,17 @@
 [tools]
-node = "lts"
-ruby = "latest"
 usage = "latest"
 python = "latest"
+ruby = "latest"
+
+"npm:npkill" = "latest"
 "npm:prettier" = "latest"
+"npm:sort-package-json" = "latest"
+"npm:npm-check-updates" = "latest"
+
+[tools.bun]
+version = "latest"
+postinstall = 'bun completions > "${HOME}/.zsh/completions/_bun"'
+
+[tools.node]
+version = "latest"
+postinstall = 'npm completion > "${HOME}/.zsh/completions/_npm"'
