@@ -1,0 +1,6 @@
+[tools]
+node = "lts"
+ruby = "latest"
+usage = "latest"
+python = "latest"
+"npm:prettier" = "latest"
