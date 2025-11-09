@@ -1,1 +1,2 @@
 export PATH="$HOME/.local/bin:$PATH"
+export PATH=$HOMEBREW_PREFIX/share/google-cloud-sdk/bin:"$PATH"
