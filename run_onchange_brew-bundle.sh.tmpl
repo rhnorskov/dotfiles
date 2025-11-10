@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# brewfile_sha256: {{ include ".brewfile" | sha256sum }}
+# brewfile_sha256: {{ include "Brewfile" | sha256sum }}
 
 {{ if eq .chezmoi.os "darwin" }}
 set -euo pipefail
 
-brew bundle --file="{{ .chezmoi.sourceDir }}/.brewfile"
+brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
 {{ end }}
 

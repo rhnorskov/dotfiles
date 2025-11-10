@@ -1,7 +1,7 @@
 [tools]
-usage = "latest"
 python = "latest"
 ruby = "latest"
+rust = "latest"
 
 "npm:npkill" = "latest"
 "npm:prettier" = "latest"
@@ -15,3 +15,6 @@ postinstall = 'bun completions > "${HOME}/.zsh/completions/_bun"'
 [tools.node]
 version = "latest"
 postinstall = 'npm completion > "${HOME}/.zsh/completions/_npm"'
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
