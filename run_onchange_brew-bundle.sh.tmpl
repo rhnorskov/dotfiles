@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 
-# brewfile_sha256: {{ include "Brewfile" | sha256sum }}
+# machine_type: {{ .machine.type }}
+# brewfile_sha256: {{ include "Brewfile.tmpl" | sha256sum }}
 
 {{ if eq .chezmoi.os "darwin" }}
 set -euo pipefail
 
+# Generate Brewfile from template in source directory
+chezmoi execute-template < "{{ .chezmoi.sourceDir }}/Brewfile.tmpl" > "{{ .chezmoi.sourceDir }}/Brewfile"
+
+# Run brew bundle
 brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
 {{ end }}
 
