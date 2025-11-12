@@ -3,8 +3,6 @@
 {{ if eq .chezmoi.os "darwin" }}
 set -euo pipefail
 
-echo "Configuring macOS defaults..."
-
 # Close any open System Preferences panes
 osascript -e 'tell application "System Preferences" to quit'
 
@@ -80,7 +78,5 @@ defaults write com.apple.WindowManager StageManagerHideWidgets -bool true
 for app in "cfprefsd" "Dock" "Finder" "SystemUIServer"; do
 	killall "${app}" &> /dev/null || true
 done
-
-echo "macOS defaults configured! Some changes require logout/restart."
 
 {{ end }}

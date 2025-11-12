@@ -6,10 +6,16 @@
 {{ if eq .chezmoi.os "darwin" }}
 set -euo pipefail
 
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null; then
+  echo "⏭️  Homebrew not found - skipping brew bundle"
+  exit 0
+fi
+
 # Generate Brewfile from template in source directory
 chezmoi execute-template < "{{ .chezmoi.sourceDir }}/Brewfile.tmpl" > "{{ .chezmoi.sourceDir }}/Brewfile"
 
-# Run brew bundle
-brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
+# Run brew bundle (quietly, only show changes)
+brew bundle --quiet --file="{{ .chezmoi.sourceDir }}/Brewfile"
 {{ end }}
 
