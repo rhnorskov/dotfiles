@@ -1,7 +1,0 @@
-{{- $machineType := "private" -}}
-{{- if stdinIsATTY -}}
-{{-   $machineType = promptString "Is this a work or private machine? (work/private)" $machineType -}}
-{{- end }}
-
-[data.machine]
-    type = {{ $machineType | quote }}

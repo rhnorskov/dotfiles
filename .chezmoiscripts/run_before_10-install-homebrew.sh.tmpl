@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-{{- if eq .chezmoi.os "darwin" }}
 {{- $brewExists := lookPath "brew" }}
 {{- if not $brewExists }}
 
 set -euo pipefail
 
-# Install Homebrew
+# Install Homebrew (will prompt for password if needed)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-{{- end }}
+
+# Add Homebrew to PATH for subsequent scripts in this session
+eval "$(/opt/homebrew/bin/brew shellenv)"
 {{- end }}
