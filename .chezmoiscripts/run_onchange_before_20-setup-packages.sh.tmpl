@@ -3,20 +3,17 @@
 # machine_type: {{ .machine.type }}
 # brewfile_sha256: {{ include "Brewfile.tmpl" | sha256sum }}
 
-{{- if eq .chezmoi.os "darwin" }}
-{{- $brewExists := lookPath "brew" }}
-{{- if not $brewExists }}
-# Homebrew not found - skip brew bundle
-exit 0
-{{- else }}
 
 set -euo pipefail
 
-# Generate Brewfile from template in source directory
+# Add Homebrew to PATH
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Generate Brewfile from template
 chezmoi execute-template < "{{ .chezmoi.sourceDir }}/Brewfile.tmpl" > "{{ .chezmoi.sourceDir }}/Brewfile"
 
-# Run brew bundle (quietly, only show changes)
+# Install all packages from Brewfile
 brew bundle --quiet --file="{{ .chezmoi.sourceDir }}/Brewfile"
-{{- end }}
-{{- end }}
 
+# Run mise install to set up runtime versions
+mise install

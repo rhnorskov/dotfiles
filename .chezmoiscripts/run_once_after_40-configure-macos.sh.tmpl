@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-{{ if eq .chezmoi.os "darwin" }}
 set -euo pipefail
 
 # Close any open System Preferences panes
@@ -88,5 +87,3 @@ defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
 for app in "cfprefsd" "Dock" "Finder" "SystemUIServer"; do
 	killall "${app}" &> /dev/null || true
 done
-
-{{ end }}
