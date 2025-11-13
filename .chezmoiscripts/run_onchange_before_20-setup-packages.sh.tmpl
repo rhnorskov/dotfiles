@@ -1,4 +1,19 @@
 #!/usr/bin/env bash
-# Test script to validate execution order
 
-echo "2: Setting up packages"
+set -euo pipefail
+
+# Verify Homebrew is available from PATH
+if ! command -v brew &> /dev/null; then
+  echo "❌ Homebrew not found in PATH"
+  echo ""
+  echo "This should not happen after install-homebrew script."
+  echo "The 'brew shellenv' eval may not be persisting between scripts."
+  exit 1
+fi
+
+echo "✓ Homebrew is available (no additional PATH setup needed)"
+
+# TODO: Add package installation logic here
+# brew install mise
+# mise install
+# etc.
