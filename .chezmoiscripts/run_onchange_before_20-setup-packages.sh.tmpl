@@ -10,7 +10,7 @@ set -euo pipefail
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Generate Brewfile from template
-chezmoi execute-template < "{{ .chezmoi.sourceDir }}/Brewfile.tmpl" > "{{ .chezmoi.sourceDir }}/Brewfile"
+"{{ .chezmoi.executable }}" execute-template < "{{ .chezmoi.sourceDir }}/Brewfile.tmpl" > "{{ .chezmoi.sourceDir }}/Brewfile"
 
 # Install all packages from Brewfile
 brew bundle --quiet --file="{{ .chezmoi.sourceDir }}/Brewfile"
