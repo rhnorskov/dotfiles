@@ -48,6 +48,9 @@ defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 # Remove all apps from the Dock
 defaults write com.apple.dock persistent-apps -array
 
+# Remove all folders from the Dock (including Downloads)
+defaults write com.apple.dock persistent-others -array
+
 # Configure Dock
 defaults write com.apple.dock tilesize -int 48
 defaults write com.apple.dock autohide -bool true
@@ -75,15 +78,15 @@ defaults write com.apple.WindowManager StageManagerHideWidgets -bool true
 # ==============================================================================
 
 # Always show Bluetooth in menu bar
-defaults write com.apple.controlcenter "NSStatusItem Visible Bluetooth" -bool true
+defaults write com.apple.controlcenter "NSStatusItem VisibleCC Bluetooth" -int 1
 
 # Always show Sound in menu bar
-defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
+defaults write com.apple.controlcenter "NSStatusItem VisibleCC Sound" -int 1
 
 # ==============================================================================
 # Apply Changes
 # ==============================================================================
 
-for app in "cfprefsd" "Dock" "Finder" "SystemUIServer"; do
+for app in "cfprefsd" "ControlCenter" "Dock" "Finder" "SystemUIServer"; do
 	killall "${app}" &> /dev/null || true
 done
