@@ -72,6 +72,16 @@ defaults write com.apple.WindowManager StandardHideWidgets -bool true
 defaults write com.apple.WindowManager StageManagerHideWidgets -bool true
 
 # ==============================================================================
+# Control Center / Menu Bar
+# ==============================================================================
+
+# Always show Bluetooth in menu bar
+defaults write com.apple.controlcenter "NSStatusItem Visible Bluetooth" -bool true
+
+# Always show Sound in menu bar
+defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
+
+# ==============================================================================
 # Apply Changes
 # ==============================================================================
 
