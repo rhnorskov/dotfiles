@@ -2,19 +2,58 @@
 
 set -euo pipefail
 
-# Add Homebrew to PATH (required since each script runs in new shell)
+# Add Homebrew to PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Verify Homebrew is now available
-if ! command -v brew &> /dev/null; then
-  echo "❌ Homebrew not found in PATH even after shellenv"
-  echo ""
-  echo "Action needed:"
-  echo "  Check that Homebrew is installed at /opt/homebrew"
-  exit 1
-fi
+# Install mise first (needed for version management)
+brew install mise
 
-# TODO: Add package installation logic here
-# brew install mise
-# mise install
-# etc.
+# Run mise install to set up runtime versions
+mise install
+
+# Install common CLI tools
+brew install cocoapods
+brew install fzf
+brew install gh
+brew install git
+brew install ncdu
+brew install ripgrep
+brew install starship
+brew install watchman
+
+{{- if eq .machine.type "work" }}
+# Work-specific packages
+{{- end }}
+
+{{- if eq .machine.type "private" }}
+# Private-specific packages
+{{- end }}
+
+brew install --cask 1password-cli
+brew install --cask 1password
+brew install --cask appcleaner
+brew install --cask brave-browser
+brew install --cask chatgpt
+brew install --cask claude-code
+brew install --cask claude
+brew install --cask docker-desktop
+brew install --cask font-fira-code-nerd-font
+brew install --cask ghostty
+brew install --cask hiddenbar
+brew install --cask karabiner-elements
+brew install --cask messenger
+brew install --cask raycast
+brew install --cask readdle-spark
+brew install --cask signal
+brew install --cask spotify
+brew install --cask tableplus
+brew install --cask visual-studio-code
+brew install --cask xcodes-app
+
+{{- if eq .machine.type "work" }}
+brew install --cask google-chrome
+{{- end }}
+
+{{- if eq .machine.type "private" }}
+brew install --cask qbittorrent
+{{- end }}
