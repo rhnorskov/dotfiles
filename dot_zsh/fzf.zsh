@@ -35,3 +35,10 @@ zinit light Aloxaf/fzf-tab
 # Configure fzf-tab to use the same color scheme as fzf
 # This ensures consistent appearance across all fuzzy search interfaces
 zstyle ':fzf-tab:*' fzf-flags $(echo $FZF_DEFAULT_OPTS)
+
+# ----------------------------------------------------------------------------
+# Custom Key Bindings
+# ----------------------------------------------------------------------------
+# Bind up arrow to trigger fzf history search (same as Ctrl+R)
+# This lets you press ↑ to open fzf history instead of navigating line by line
+bindkey '^[[A' fzf-history-widget

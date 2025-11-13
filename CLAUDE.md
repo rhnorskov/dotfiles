@@ -190,3 +190,69 @@ fi
 # Success - silent
 exit 0
 ```
+
+## Template-Level Conditionals (Best Practice)
+
+**IMPORTANT:** Move conditional checks to template-level whenever possible to avoid unnecessary script execution and prevent premature evaluation of expensive operations (like `onepasswordRead`).
+
+### Why Use Template-Level Conditionals
+
+1. **Prevents unnecessary script execution** - Scripts don't run at all if conditions aren't met
+2. **Avoids premature evaluation** - Template functions like `onepasswordRead` are only evaluated when needed
+3. **Cleaner output** - No script execution means no potential for error messages
+4. **More efficient** - Skips script execution overhead entirely
+
+### Pattern
+
+Use chezmoi's `lookPath` and `output` functions to check conditions during template rendering:
+
+```bash
+#!/usr/bin/env bash
+
+{{- $toolExists := lookPath "tool" }}
+{{- if not $toolExists }}
+# Tool not found - skip setup
+exit 0
+{{- else }}
+
+# Your script logic here
+# This only gets rendered if the tool exists
+{{- end }}
+```
+
+### Checking Command Output
+
+For more complex checks, use the `output` function:
+
+```bash
+#!/usr/bin/env bash
+
+{{- $toolExists := lookPath "tool" }}
+{{- if not $toolExists }}
+# Tool not found - skip setup
+exit 0
+{{- else }}
+{{- $status := output "tool" "status" | default "" }}
+{{- if contains "already configured" $status }}
+# Already configured - skip setup
+exit 0
+{{- else }}
+
+# Your setup logic here
+# This only gets rendered if tool exists AND isn't configured yet
+{{- end }}
+{{- end }}
+```
+
+### When to Use Template-Level Conditionals
+
+- **Command availability checks** - Use `lookPath` instead of runtime `command -v`
+- **State checks that prevent expensive operations** - Especially when using `onepasswordRead` or other secret management
+- **OS checks** - Already done via `{{ if eq .chezmoi.os "darwin" }}`
+- **Configuration checks** - Use `output` to check if setup is already complete
+
+### When to Use Runtime Conditionals
+
+- **Checks requiring complex logic** - When template functions aren't sufficient
+- **Error conditions requiring user action** - When you need to provide actionable error messages
+- **Dynamic checks** - When the condition depends on runtime state that can't be determined during template rendering

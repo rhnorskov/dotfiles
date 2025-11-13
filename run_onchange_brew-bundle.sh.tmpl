@@ -3,19 +3,20 @@
 # machine_type: {{ .machine.type }}
 # brewfile_sha256: {{ include "Brewfile.tmpl" | sha256sum }}
 
-{{ if eq .chezmoi.os "darwin" }}
-set -euo pipefail
+{{- if eq .chezmoi.os "darwin" }}
+{{- $brewExists := lookPath "brew" }}
+{{- if not $brewExists }}
+# Homebrew not found - skip brew bundle
+exit 0
+{{- else }}
 
-# Check if Homebrew is installed
-if ! command -v brew &> /dev/null; then
-  echo "⏭️  Homebrew not found - skipping brew bundle"
-  exit 0
-fi
+set -euo pipefail
 
 # Generate Brewfile from template in source directory
 chezmoi execute-template < "{{ .chezmoi.sourceDir }}/Brewfile.tmpl" > "{{ .chezmoi.sourceDir }}/Brewfile"
 
 # Run brew bundle (quietly, only show changes)
 brew bundle --quiet --file="{{ .chezmoi.sourceDir }}/Brewfile"
-{{ end }}
+{{- end }}
+{{- end }}
 
