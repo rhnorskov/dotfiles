@@ -11,3 +11,9 @@
 # ----------------------------------------------------------------------------
 # This sets up mise's shims and environment for managing tool versions
 eval "$(mise activate zsh)"
+
+# ----------------------------------------------------------------------------
+# Bun Global Binaries
+# ----------------------------------------------------------------------------
+# Add Bun's global bin directory to PATH for globally installed packages
+export PATH="$HOME/.bun/bin:$PATH"
