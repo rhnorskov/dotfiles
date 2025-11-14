@@ -1,0 +1,2 @@
+- Downloads folder is not being removed from Dock.
+- Menu items are not shown on the Menu Bar.
