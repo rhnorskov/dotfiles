@@ -24,9 +24,6 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 # ----------------------------------------------------------------------------
 # Initialize Zsh Completion System
 # ----------------------------------------------------------------------------
-# Add custom completions directory to fpath
-fpath=(~/.zsh/completions $fpath)
-
 # Must be called before using any completions
 autoload -Uz compinit
 compinit

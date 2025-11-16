@@ -5,6 +5,7 @@
 # This file loads modular configuration from ~/.zsh/ directory.
 #
 # Organization:
+#   ~/.zsh/functions.zsh - Custom shell functions
 #   ~/.zsh/plugins.zsh   - Plugin manager (Zinit) and plugin loading
 #   ~/.zsh/fzf.zsh       - Fuzzy finder configuration
 #   ~/.zsh/mise.zsh      - Tool version manager (mise)
@@ -14,10 +15,14 @@
 # Load Configuration Modules
 # ----------------------------------------------------------------------------
 # IMPORTANT: Order matters!
-# 1. plugins.zsh must be loaded first (sets up plugin manager)
-# 2. fzf.zsh must be loaded before plugins that depend on it (like fzf-tab)
-# 3. mise.zsh loads tool version manager
-# 4. prompt.zsh should be loaded last (after all plugins)
+# 1. functions.zsh loads custom functions (no dependencies)
+# 2. plugins.zsh must be loaded first (sets up plugin manager)
+# 3. fzf.zsh must be loaded before plugins that depend on it (like fzf-tab)
+# 4. mise.zsh loads tool version manager
+# 5. prompt.zsh should be loaded last (after all plugins)
+
+# Load custom functions
+source ~/.zsh/functions.zsh
 
 # Initialize plugin manager and load base plugins
 source ~/.zsh/plugins.zsh
