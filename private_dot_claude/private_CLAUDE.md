@@ -1,0 +1,1 @@
+- In all TypeScript code, avoid using the explicit any type. Use safer, more specific types instead.
