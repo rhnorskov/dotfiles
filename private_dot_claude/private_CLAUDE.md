@@ -1,1 +1,2 @@
 - In all TypeScript code, avoid using the explicit any type. Use safer, more specific types instead.
+- Always use context7 when I need code generation, setup or configuration steps, or library/API documentation. This means you should automatically use the Context7 MCPtools to resolve library id and get library docs without me having to explicitly ask.
