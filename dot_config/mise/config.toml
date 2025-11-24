@@ -5,6 +5,7 @@ node = "latest"
 python = "latest"
 ruby = "latest"
 rust = "latest"
+uv = "latest"
 
 "npm:npkill" = "latest"
 "npm:npm-check-updates" = "latest"
