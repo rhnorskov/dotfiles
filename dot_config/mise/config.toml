@@ -13,5 +13,7 @@ uv = "latest"
 "npm:sort-package-json" = "latest"
 "npm:vercel" = "latest"
 
+"pipx:oraios/serena" = "latest"
+
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
