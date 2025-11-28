@@ -15,6 +15,3 @@ rust = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
-
-auto_install = true
-not_found_auto_install = true
