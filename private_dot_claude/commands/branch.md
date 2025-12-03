@@ -1,4 +1,4 @@
-Create a new feature branch following conventional commit conventions.
+Create a new feature branch following conventional commit conventions and commit the staged changes.
 
 First, analyze the staged files:
 
@@ -7,12 +7,19 @@ First, analyze the staged files:
 3. Based on the files and changes, suggest:
    - An appropriate type (feat, fix, docs, style, refactor, test, chore, etc.)
    - A brief description in kebab-case
+   - A commit message following the conventional commit format
 
 Then ask the user for:
 
 1. The type (provide your suggested type as the default/recommendation)
 2. A brief description (provide your suggested description as the default/recommendation)
+3. A commit message (provide your suggested message as the default/recommendation)
 
-Finally, create and checkout the branch with format: `{type}/{description}`
+Finally:
 
-Examples: `feat/add-user-authentication` or `fix/resolve-login-bug`
+1. Create and checkout the branch with format: `{type}/{description}`
+2. Commit the staged changes with the commit message in format: `{type}: {commit message}`
+
+Examples:
+- Branch: `feat/add-user-authentication` or `fix/resolve-login-bug`
+- Commit: `feat: add user authentication flow` or `fix: resolve login bug with session handling`
