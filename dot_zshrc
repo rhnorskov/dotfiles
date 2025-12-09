@@ -12,6 +12,25 @@
 #   ~/.zsh/prompt.zsh    - Shell prompt (Starship)
 
 # ----------------------------------------------------------------------------
+# Shell Behavior
+# ----------------------------------------------------------------------------
+# Subword-aware backward delete (like VS Code's default word separators)
+# Treats all special characters except underscore as word boundaries
+# If cursor is right after a separator, delete just that character
+# Otherwise delete the word, stopping at the next separator
+function backward-kill-subword() {
+  local char_before="${LBUFFER[-1]}"
+  if [[ "$char_before" =~ '[`~!@#$%^&*()\-=+\[{\]}\\|;:'\''",.<>/?/]' ]]; then
+    LBUFFER="${LBUFFER[1,-2]}"
+  else
+    local WORDCHARS='_'
+    zle backward-kill-word
+  fi
+}
+zle -N backward-kill-subword
+bindkey '^[^?' backward-kill-subword
+
+# ----------------------------------------------------------------------------
 # Load Configuration Modules
 # ----------------------------------------------------------------------------
 # IMPORTANT: Order matters!
