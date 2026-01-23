@@ -1,2 +1,4 @@
 - In all TypeScript code, avoid using the explicit any type. Use safer, more specific types instead.
 - Always use context7 when I need code generation, setup or configuration steps, or library/API documentation. This means you should automatically use the Context7 MCPtools to resolve library id and get library docs without me having to explicitly ask.
+- Never describe code changes in comments. Comments should document the current state and purpose of the code, not its history.
+- When writing CSV files, always include `sep=,` (or the appropriate separator) on the first line for Excel compatibility.
