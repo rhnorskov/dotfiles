@@ -6,6 +6,7 @@
 #
 # Organization:
 #   ~/.zsh/functions.zsh - Custom shell functions
+#   ~/.zsh/aliases.zsh   - Command aliases
 #   ~/.zsh/plugins.zsh   - Plugin manager (Zinit) and plugin loading
 #   ~/.zsh/fzf.zsh       - Fuzzy finder configuration
 #   ~/.zsh/mise.zsh      - Tool version manager (mise)
@@ -42,6 +43,9 @@ bindkey '^[^?' backward-kill-subword
 
 # Load custom functions
 source ~/.zsh/functions.zsh
+
+# Load aliases
+source ~/.zsh/aliases.zsh
 
 # Initialize plugin manager and load base plugins
 source ~/.zsh/plugins.zsh
