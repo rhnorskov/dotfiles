@@ -2,3 +2,4 @@
 - Always use context7 when I need code generation, setup or configuration steps, or library/API documentation. This means you should automatically use the Context7 MCPtools to resolve library id and get library docs without me having to explicitly ask.
 - Never describe code changes in comments. Comments should document the current state and purpose of the code, not its history.
 - When writing CSV files, always include `sep=,` (or the appropriate separator) on the first line for Excel compatibility.
+- If you are unable to read the contents of a website (e.g., WebFetch fails or returns incomplete/blocked content), try again using Chrome browser automation tools (mcp__claude-in-chrome__*).
