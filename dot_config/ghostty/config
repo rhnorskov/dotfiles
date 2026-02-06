@@ -7,6 +7,9 @@ font-feature = +liga
 font-feature = +dlig
 adjust-cell-height = 20%
 
+window-width = 120
+window-height = 36
 window-padding-x = 16
 window-padding-y = 8
+macos-option-as-alt = true
 keybind = shift+enter=text:\x1b\r
