@@ -3,3 +3,6 @@ export PATH="$HOMEBREW_PREFIX/share/google-cloud-sdk/bin:$PATH"
 
 # Mise shims for GUI apps (Xcode, Android Studio, etc.)
 eval "$(mise activate zsh --shims)"
+
+# OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
