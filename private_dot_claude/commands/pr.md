@@ -1,11 +1,23 @@
 Create a pull request using the gh CLI, following conventional commit conventions.
 
-First, analyze the current branch and changes:
+First, check prerequisites:
 
 1. Run `git branch --show-current` to get the current branch name
-2. Run `git log main..HEAD --oneline` to see all commits on this branch
-3. Run `git diff main...HEAD --stat` to understand the scope of changes
-4. Read the PR template at `.github/pull_request_template.md`
+2. Run `git status --short` to check for uncommitted changes
+3. Run `git log main..HEAD --oneline` to see commits on this branch
+
+**If still on `main` (no feature branch created):**
+- There must be staged or unstaged changes to work with. If there are none, abort and tell the user there's nothing to create a PR for.
+- Run the `/branch` command first to create a feature branch and commit changes, then continue with the PR flow below.
+
+**If on a feature branch but there are uncommitted changes (staged or unstaged):**
+- Run the `/commit` command first to commit those changes, then continue with the PR flow below.
+
+Then, analyze the branch and changes:
+
+1. Run `git log main..HEAD --oneline` to see all commits on this branch
+2. Run `git diff main...HEAD --stat` to understand the scope of changes
+3. Read the PR template at `.github/pull_request_template.md`
 
 Based on the analysis, prepare the PR:
 
