@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+{{- if not (lookPath "brew") }}
+# Homebrew not found - skip
+exit 0
+{{- else }}
+
+set -euo pipefail
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Stop any existing autoupdate schedule
+brew autoupdate stop &> /dev/null || true
+
+# Start autoupdate: every 6 hours, upgrade leaves only, cleanup, run immediately
+brew autoupdate start 21600 --upgrade --cleanup --immediate --leaves-only
+
+{{- end }}
