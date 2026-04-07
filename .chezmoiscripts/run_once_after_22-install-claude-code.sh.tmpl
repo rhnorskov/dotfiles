@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Install Claude Code via standalone installer
+
+{{- if lookPath "claude" }}
+# Claude Code already installed - skip
+exit 0
+{{- else }}
+
+set -euo pipefail
+
+curl -fsSL https://claude.ai/install.sh | bash
+
+{{- end }}
