@@ -11,5 +11,5 @@ window-width = 120
 window-height = 36
 window-padding-x = 16
 window-padding-y = 8
-macos-option-as-alt = true
+macos-option-as-alt = left
 keybind = shift+enter=text:\x1b\r
