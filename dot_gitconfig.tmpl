@@ -1,7 +1,11 @@
 # This is Git's per-user configuration file.
 [user]
 	name = Rasmus Nørskov
+{{- if eq .machine.type "work" }}
+	email = rn@onskeskyen.dk
+{{- else }}
 	email = rasmus@norskov.org
+{{- end }}
 [pull]
 	rebase = true
 [push]
@@ -15,6 +19,9 @@
 	last = log -1 HEAD
 [core]
 	editor = code --wait
-	
+
 [init]
 	defaultBranch = main
+[wt]
+	basedir = ../{gitroot}.worktrees
+	copyignored = true

@@ -164,6 +164,12 @@
                 }
             ],
             "name": "Default profile",
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "caps_lock" },
+                    "to": [{ "key_code": "escape" }]
+                }
+            ],
             "selected": true,
             "virtual_hid_keyboard": {
                 "indicate_sticky_modifier_keys_state": false,
