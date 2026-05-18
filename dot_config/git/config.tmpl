@@ -6,6 +6,13 @@
 {{- else }}
 	email = rasmus@norskov.org
 {{- end }}
+{{- if eq .machine.type "work" }}
+[includeIf "gitdir:~/Code/rhnorskov/"]
+	path = ~/.config/git/config-personal
+{{- else }}
+[includeIf "gitdir:~/Code/gowish/"]
+	path = ~/.config/git/config-work
+{{- end }}
 [pull]
 	rebase = true
 [push]
