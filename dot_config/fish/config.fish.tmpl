@@ -28,6 +28,14 @@ git wt --init fish | source
 # Starship prompt
 starship init fish | source
 
+# GitHub token for Claude Code github MCP plugin
+if command -q gh
+    set -gx GITHUB_PERSONAL_ACCESS_TOKEN (gh auth token)
+end
+
+# Context7 API key for Claude Code context7 MCP plugin
+set -gx CONTEXT7_API_KEY "{{ onepasswordRead "op://Personal/Context7/claude code" }}"
+
 {{- if eq .machine.type "work" }}
 
 # Aliases

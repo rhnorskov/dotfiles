@@ -1,5 +1,18 @@
 {
-	"includeCoAuthoredBy": false,
+	"attribution": {
+		"commit": "",
+		"pr": ""
+	},
+	"effortLevel": "xhigh",
+	"enabledPlugins": {
+		"context7@claude-plugins-official": true,
+		"datadog@claude-plugins-official": true,
+		"frontend-design@claude-plugins-official": true,
+		"github@claude-plugins-official": true,
+		"rust-analyzer-lsp@claude-plugins-official": true,
+		"swift-lsp@claude-plugins-official": true,
+		"typescript-lsp@claude-plugins-official": true
+	},
 	"permissions": {
 		"allow": [
 			"mcp__context7__resolve-library-id",
@@ -15,16 +28,15 @@
 			"mcp__papi__pf_stop",
 			"WebSearch",
 			"WebFetch"
-		]
+		],
+		"defaultMode": "auto"
 	},
-	"enabledPlugins": {
-		"frontend-design@claude-code-plugins": true,
-		"rust-analyzer-lsp@claude-plugins-official": true,
-		"swift-lsp@claude-plugins-official": true
-	},
-	"alwaysThinkingEnabled": true,
-	"effortLevel": "ultracode",
+	"respectGitignore": false,
 	"skipDangerousModePermissionPrompt": true,
-	"agentPushNotifEnabled": true,
-	"voiceEnabled": true
+	"tui": "fullscreen",
+	"ultracode": true,
+	"voice": {
+		"enabled": true,
+		"mode": "hold"
+	}
 }
