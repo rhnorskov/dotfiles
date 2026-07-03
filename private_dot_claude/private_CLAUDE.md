@@ -1,5 +1,6 @@
 - In all TypeScript code, avoid using the explicit any type. Use safer, more specific types instead.
-- Never describe code changes in comments. Comments should document the current state and purpose of the code, not its history.
+- Never describe code changes in comments. Comments should document the current state and purpose of the code, not its history. Never write comments that reference removed code, rejected alternatives, or the editing session ("no early bail here", "X moved to Y") — a comment must make sense to a reader who never saw the iteration that produced it.
+- Keep code comments and PR/commit descriptions terse: one line where possible, explain only the non-obvious "why", never restate the diff or pad with recaps/justification.
 - When writing CSV files, always include `sep=,` (or the appropriate separator) on the first line for Excel compatibility.
 - If you are unable to read the contents of a website (e.g., WebFetch fails or returns incomplete/blocked content), try again using Chrome browser automation tools (mcp__claude-in-chrome__*).
 - Prefer null over undefined for "no valid result" returns. Throw for programmer errors at internal boundaries; return null for expected invalid input at system boundaries.

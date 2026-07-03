@@ -1,42 +1,62 @@
 {
-	"attribution": {
-		"commit": "",
-		"pr": ""
-	},
-	"effortLevel": "xhigh",
-	"enabledPlugins": {
-		"context7@claude-plugins-official": true,
-		"datadog@claude-plugins-official": true,
-		"frontend-design@claude-plugins-official": true,
-		"github@claude-plugins-official": true,
-		"rust-analyzer-lsp@claude-plugins-official": true,
-		"swift-lsp@claude-plugins-official": true,
-		"typescript-lsp@claude-plugins-official": true
-	},
-	"permissions": {
-		"allow": [
-			"mcp__context7__resolve-library-id",
-			"mcp__context7__query-docs",
-			"mcp__papi__id_convert",
-			"mcp__papi__id_decode",
-			"mcp__papi__id_encode",
-			"mcp__papi__id_query",
-			"mcp__papi__pf_get_config",
-			"mcp__papi__pf_list",
-			"mcp__papi__pf_start_redis",
-			"mcp__papi__pf_start_service",
-			"mcp__papi__pf_stop",
-			"WebSearch",
-			"WebFetch"
-		],
-		"defaultMode": "auto"
-	},
-	"respectGitignore": false,
-	"skipDangerousModePermissionPrompt": true,
-	"tui": "fullscreen",
-	"ultracode": true,
-	"voice": {
-		"enabled": true,
-		"mode": "hold"
-	}
+  "respectGitignore": false,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "env": {
+    "CLAUDE_AFK_TIMEOUT_MS": "2147483647"
+  },
+  "permissions": {
+    "allow": [
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "mcp__papi__id_convert",
+      "mcp__papi__id_decode",
+      "mcp__papi__id_encode",
+      "mcp__papi__id_query",
+      "mcp__papi__pf_get_config",
+      "mcp__papi__pf_list",
+      "mcp__papi__pf_start_redis",
+      "mcp__papi__pf_start_service",
+      "mcp__papi__pf_stop",
+      "WebSearch",
+      "WebFetch"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "claude-fable-5[1m]",
+  "disableClaudeAiConnectors": true,
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0,
+    "refreshInterval": 10
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true,
+    "datadog@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "caveman@caveman": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
+  },
+  "ultracode": true,
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "agentPushNotifEnabled": true
 }
