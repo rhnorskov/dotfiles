@@ -1,5 +1,8 @@
 theme = Dracula
 
+# Attach to "main" tmux session, create if missing
+command = /opt/homebrew/bin/tmux new-session -A -s main
+
 font-family = FiraCode Nerd Font Mono Med
 font-size = 14
 font-feature = +calt
@@ -13,3 +16,7 @@ window-padding-x = 16
 window-padding-y = 8
 macos-option-as-alt = left
 keybind = shift+enter=text:\x1b\r
+
+# \x02 = Ctrl+B (tmux prefix): cmd+k sesh picker, cmd+l last session
+keybind = cmd+k=text:\x02T
+keybind = cmd+l=text:\x02L

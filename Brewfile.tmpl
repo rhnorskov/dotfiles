@@ -3,6 +3,7 @@ tap "homebrew/autoupdate"
 
 # Common packages for all machines
 brew "coreutils"
+brew "fd"
 brew "fish"
 brew "fzf"
 brew "gh"
@@ -14,8 +15,11 @@ brew "libyaml"
 brew "mise"
 brew "ncdu"
 brew "ripgrep"
+brew "sesh"
 brew "starship"
+brew "tmux"
 brew "watchman"
+brew "zoxide"
 
 {{- if eq .machine.type "work" }}
 # Work-specific packages
