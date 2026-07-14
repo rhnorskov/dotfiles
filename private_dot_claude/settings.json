@@ -1,11 +1,11 @@
 {
   "respectGitignore": false,
+  "env": {
+    "CLAUDE_CODE_DISABLE_MOUSE_CLICKS": "1"
+  },
   "attribution": {
     "commit": "",
     "pr": ""
-  },
-  "env": {
-    "CLAUDE_AFK_TIMEOUT_MS": "2147483647"
   },
   "permissions": {
     "allow": [
@@ -25,7 +25,6 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
   "disableClaudeAiConnectors": true,
   "statusLine": {
     "type": "command",
@@ -34,14 +33,14 @@
     "refreshInterval": 10
   },
   "enabledPlugins": {
+    "caveman@caveman": true,
     "context7@claude-plugins-official": true,
     "datadog@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "github@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "caveman@caveman": true
+    "typescript-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -52,11 +51,13 @@
     }
   },
   "ultracode": true,
+  "advisorModel": "fable",
   "tui": "fullscreen",
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
   "skipDangerousModePermissionPrompt": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "model": "claude-fable-5[1m]"
 }

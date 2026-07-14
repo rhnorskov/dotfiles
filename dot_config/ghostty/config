@@ -17,6 +17,48 @@ window-padding-y = 8
 macos-option-as-alt = left
 keybind = shift+enter=text:\x1b\r
 
+# cmd+c: copy tmux selection (prefix+y); no-op when no selection
+keybind = cmd+c=text:\x02y
+# cmd+shift+c: copy ghostty-native (shift-drag) selection, e.g. over mouse-capturing TUIs
+keybind = cmd+shift+c=copy_to_clipboard
+
 # \x02 = Ctrl+B (tmux prefix): cmd+k sesh picker, cmd+l last session
 keybind = cmd+k=text:\x02T
 keybind = cmd+l=text:\x02L
+
+# Route macOS window/split shortcuts to tmux instead of ghostty's own
+keybind = cmd+t=text:\x02c
+keybind = cmd+w=text:\x02x
+keybind = cmd+d=text:\x02%
+keybind = cmd+shift+d=text:\x02"
+keybind = cmd+shift+left=text:\x02p
+keybind = cmd+shift+right=text:\x02n
+# cmd+opt+arrow: switch tmux pane directionally (prefix + arrow)
+keybind = cmd+alt+left=text:\x02\x1b[D
+keybind = cmd+alt+right=text:\x02\x1b[C
+keybind = cmd+alt+up=text:\x02\x1b[A
+keybind = cmd+alt+down=text:\x02\x1b[B
+
+# cmd+]/[ : cycle tmux panes (next / last-active)
+keybind = cmd+]=text:\x02o
+keybind = cmd+[=text:\x02;
+
+# ctrl+cmd+arrow: resize tmux pane (prefix + alt-arrow, step 5)
+keybind = cmd+ctrl+up=text:\x02\x1b[1;3A
+keybind = cmd+ctrl+down=text:\x02\x1b[1;3B
+keybind = cmd+ctrl+left=text:\x02\x1b[1;3D
+keybind = cmd+ctrl+right=text:\x02\x1b[1;3C
+
+# ctrl+cmd+= : equalize pane sizes without reflow (prefix E -> select-layout -E)
+keybind = cmd+ctrl+==text:\x02E
+keybind = cmd+digit_1=text:\x021
+keybind = cmd+digit_2=text:\x022
+keybind = cmd+digit_3=text:\x023
+keybind = cmd+digit_4=text:\x024
+keybind = cmd+digit_5=text:\x025
+keybind = cmd+digit_6=text:\x026
+keybind = cmd+digit_7=text:\x027
+keybind = cmd+digit_8=text:\x028
+keybind = cmd+digit_9=text:\x029
+
+keybind = cmd+n=new_window
