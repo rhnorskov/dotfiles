@@ -2,6 +2,30 @@
     "global": { "show_in_menu_bar": false },
     "profiles": [
         {
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "Map Caps -> Esc (when alone), L_Ctrl (when chorded)",
+                        "manipulators": [
+                            {
+                                "description": "Map Caps -> Esc (when alone), L_Ctrl (when chorded)",
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
             "devices": [
                 {
                     "fn_function_keys": [
@@ -164,12 +188,6 @@
                 }
             ],
             "name": "Default profile",
-            "simple_modifications": [
-                {
-                    "from": { "key_code": "caps_lock" },
-                    "to": [{ "key_code": "escape" }]
-                }
-            ],
             "selected": true,
             "virtual_hid_keyboard": {
                 "indicate_sticky_modifier_keys_state": false,
