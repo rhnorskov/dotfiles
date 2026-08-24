@@ -1,3 +1,9 @@
+---
+name: commit
+description: Create a git commit with a one-liner message, following conventional commit conventions.
+disable-model-invocation: true
+---
+
 Create a git commit with a one-liner message, following conventional commit conventions.
 
 First, analyze the staged files:

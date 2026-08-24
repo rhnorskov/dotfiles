@@ -1,3 +1,9 @@
+---
+name: new-branch
+description: Create a new feature branch following conventional commit conventions and commit the staged changes.
+disable-model-invocation: true
+---
+
 Create a new feature branch following conventional commit conventions and commit the staged changes.
 
 First, analyze the staged files:

@@ -1,3 +1,9 @@
+---
+name: pr
+description: Create a pull request using the gh CLI, following conventional commit conventions.
+disable-model-invocation: true
+---
+
 Create a pull request using the gh CLI, following conventional commit conventions.
 
 First, check prerequisites:
@@ -8,7 +14,7 @@ First, check prerequisites:
 
 **If still on `main` (no feature branch created):**
 - There must be staged or unstaged changes to work with. If there are none, abort and tell the user there's nothing to create a PR for.
-- Run the `/branch` command first to create a feature branch and commit changes, then continue with the PR flow below.
+- Run the `/new-branch` skill first to create a feature branch and commit changes, then continue with the PR flow below.
 
 **If on a feature branch but there are uncommitted changes (staged or unstaged):**
 - Run the `/commit` command first to commit those changes, then continue with the PR flow below.

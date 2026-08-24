@@ -4,4 +4,5 @@
 - When writing CSV files, always include `sep=,` (or the appropriate separator) on the first line for Excel compatibility.
 - If you are unable to read the contents of a website (e.g., WebFetch fails or returns incomplete/blocked content), try again using Chrome browser automation tools (mcp__claude-in-chrome__*).
 - Prefer null over undefined for "no valid result" returns. Throw for programmer errors at internal boundaries; return null for expected invalid input at system boundaries.
+- When you need input from me (a choice, confirmation, or clarification), ask via the AskUserQuestion tool rather than listing questions as plain text.
 - `hunk` is the user's terminal diff-review CLI (github.com/modem-dev/hunk), not git jargon. `hunk diff` = working-tree changes (incl. untracked; `--watch` auto-reloads); `hunk show` = latest commit (`hunk show HEAD~1` an earlier one). So a committed single-commit PR → `hunk show`; uncommitted edits → `hunk diff`.
