@@ -1,0 +1,7 @@
+{
+  // MD013 is unsatisfiable here: prettier's default proseWrap leaves long prose
+  // lines alone, and markdownlint-cli2 --fix has no autofix for line length.
+  "config": {
+    "MD013": false
+  }
+}
