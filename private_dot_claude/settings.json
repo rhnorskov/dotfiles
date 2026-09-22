@@ -6,21 +6,6 @@
 		"sessionUrl": false
 	},
 	"permissions": {
-		"allow": [
-			"mcp__plugin_context7_context7__resolve-library-id",
-			"mcp__plugin_context7_context7__query-docs",
-			"mcp__papi__id_convert",
-			"mcp__papi__id_decode",
-			"mcp__papi__id_encode",
-			"mcp__papi__id_query",
-			"mcp__papi__pf_get_config",
-			"mcp__papi__pf_list",
-			"mcp__papi__pf_start_redis",
-			"mcp__papi__pf_start_service",
-			"mcp__papi__pf_stop",
-			"WebSearch",
-			"WebFetch"
-		],
 		"defaultMode": "auto"
 	},
 	"statusLine": {
