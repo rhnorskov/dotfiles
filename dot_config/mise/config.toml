@@ -6,6 +6,7 @@ node = "latest"
 python = "latest"
 ruby = "latest"
 rust = "latest"
+uv = "latest"
 
 "npm:@biomejs/biome" = "latest"
 "npm:corepack" = "latest"
@@ -13,6 +14,8 @@ rust = "latest"
 "npm:npm-check-updates" = "latest"
 "npm:sort-package-json" = "latest"
 "npm:vercel" = "latest"
+
+"pypi:litellm" = { version = "latest", extras = ["proxy"] }
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
