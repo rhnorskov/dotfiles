@@ -28,8 +28,12 @@ end
 
 local function choose(bufnr)
   local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
-  local biome_root = vim.fs.root(bufnr, { "biome.json", "biome.jsonc" })
-  local prettier_root = vim.fs.root(bufnr, prettier_configs) or prettier_package_json_root(dir)
+  -- Nested lists give the filenames equal priority, so vim.fs.root returns the
+  -- nearest ancestor holding any of them. A flat list would instead rank by
+  -- position in the list, letting a distant .prettierrc outrank a nearer
+  -- prettier.config.js.
+  local biome_root = vim.fs.root(bufnr, { { "biome.json", "biome.jsonc" } })
+  local prettier_root = vim.fs.root(bufnr, { prettier_configs }) or prettier_package_json_root(dir)
   if biome_root and prettier_root then
     -- Both are ancestors of the buffer, so the longer path is the nearer root.
     return #biome_root >= #prettier_root and { "biome-check" } or { "prettier" }
