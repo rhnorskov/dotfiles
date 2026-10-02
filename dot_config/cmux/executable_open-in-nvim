@@ -1,0 +1,37 @@
+#!/bin/sh
+# cmux app.preferredEditor: open "path[:line[:col]]" in the most recently focused live nvim and focus its pane.
+# Exits nonzero (cmux then uses the macOS default app) for binaries, directories, or when no nvim is reachable.
+NVIM=/opt/homebrew/bin/nvim
+CMUX=/Applications/cmux.app/Contents/Resources/bin/cmux
+DIR="$HOME/.local/state/nvim/cmux-nvim"
+
+arg=$1 line= col=
+case $arg in *'
+'*) exit 1 ;; esac
+
+# Strip :line[:col] only when the full string isn't itself an existing file (e.g. "log:2024")
+if [ ! -e "$arg" ]; then
+  case ${arg##*:} in ''|*[!0-9]*) ;; *) line=${arg##*:}; arg=${arg%:*} ;; esac
+  case ${arg##*:} in ''|*[!0-9]*) ;; *) [ -n "$line" ] && { col=$line; line=${arg##*:}; arg=${arg%:*}; } ;; esac
+fi
+[ "$line" = 0 ] && line=1
+[ "$col" = 0 ] && col=1
+
+[ -d "$arg" ] && exit 1
+if [ -s "$arg" ] && [ "$(/usr/bin/file -b --mime-encoding "$arg")" = binary ]; then exit 1; fi
+
+[ -d "$DIR" ] || exit 1
+for entry in $(ls -t "$DIR"); do
+  { read -r sock; read -r panel; read -r workspace; } < "$DIR/$entry"
+  if [ -S "$sock" ] && "$NVIM" --server "$sock" --remote-expr 1 >/dev/null 2>&1; then
+    "$NVIM" --server "$sock" --remote-send '<C-\><C-N>' >/dev/null 2>&1
+    "$NVIM" --server "$sock" --remote "$arg" >/dev/null 2>&1 || exit 1
+    if [ -n "$line" ]; then
+      "$NVIM" --server "$sock" --remote-expr "execute('call cursor($line, ${col:-1}) | normal! zz')" >/dev/null 2>&1
+    fi
+    [ -n "$panel" ] && "$CMUX" focus-panel --panel "$panel" ${workspace:+--workspace "$workspace"} >/dev/null 2>&1
+    exit 0
+  fi
+  rm -f "$DIR/$entry"
+done
+exit 1
