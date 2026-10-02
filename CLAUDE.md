@@ -38,7 +38,7 @@ chezmoi update
 chezmoi execute-template < Brewfile.tmpl > /tmp/test-brewfile
 
 # Test a specific script without applying
-chezmoi execute-template < run_once_10-setup-homebrew.sh.tmpl > /tmp/test-script.sh
+chezmoi execute-template < .chezmoiscripts/run_once_before_10-install-homebrew.sh.tmpl > /tmp/test-script.sh
 bash -n /tmp/test-script.sh  # Syntax check
 ```
 
@@ -53,30 +53,40 @@ The repository uses `.chezmoi.toml.tmpl` to prompt for machine type on first run
 ### File Naming Conventions
 Chezmoi uses special prefixes to determine file handling:
 - `dot_` → `.` (e.g., `dot_zshrc` → `~/.zshrc`)
-- `private_` → file excluded from git (e.g., `private_dot_claude/settings.json`)
+- `private_` → the applied file or directory gets `0600`/`0700` (e.g. `private_dot_claude/` → `~/.claude` at `0700`; the prefix must be on the file itself for `0600`). This does **not** exclude anything from git — this repo is public, so never put a secret in a `private_` file; use `onepasswordRead` instead.
 - `run_once_` → script runs once
 - `run_onchange_` → script runs when template content changes (tracked via SHA256 comment)
-- `run_<N>-` → scripts run in numeric order (e.g., `run_20-`, `run_30-`)
+- `run_before_` / `run_after_` → script runs before / after files are applied; this outranks the number
+- `run_<N>-` → orders scripts *within* a phase (e.g., `run_once_before_10-`, `run_once_before_20-`)
 - `.tmpl` → file is templated (processed by chezmoi's template engine)
 
 ### Bootstrap Sequence
-1. **run_once_10-setup-homebrew.sh.tmpl** - Installs Homebrew (macOS only)
-2. **run_onchange_brew-bundle.sh.tmpl** - Generates Brewfile from template and installs packages
-3. **run_20-setup-1password.sh.tmpl** - Validates 1Password CLI is configured
-4. **run_30-setup-claude.sh.tmpl** - Configures Claude Code with Context7 MCP server
-5. **run_once_after_configure-macos.sh.tmpl** - Sets macOS system preferences
+All scripts live in `.chezmoiscripts/`. Every `before_` script runs, then files are applied, then every
+`after_` script — the `before_`/`after_` attribute outranks the number, which is why `22-` runs after `30-`.
+
+Before files are applied:
+1. **run_once_before_10-install-homebrew.sh.tmpl** - Installs Homebrew (macOS only)
+2. **run_onchange_before_20-setup-packages.sh.tmpl** - Renders Brewfile from the template, runs `brew bundle`, then `mise install`
+3. **run_once_before_30-setup-1password.sh.tmpl** - Validates the 1Password CLI is configured
+
+After files are applied:
+4. **run_once_after_22-install-claude-code.sh.tmpl** - Installs Claude Code
+5. **run_once_after_25-setup-fish.sh.tmpl** - Registers fish and makes it the default shell
+6. **run_once_after_35-setup-brew-autoupdate.sh.tmpl** - Enables `brew autoupdate`
+7. **run_once_after_40-configure-macos.sh.tmpl** - Sets macOS system preferences
 
 ### Dependency Management
 - **Brewfile.tmpl**: Central package definition with conditional work/private sections
-- **run_onchange_brew-bundle.sh.tmpl**: Automatically reruns when Brewfile.tmpl changes (SHA256 tracking)
+- **run_onchange_before_20-setup-packages.sh.tmpl**: Automatically reruns when Brewfile.tmpl changes (SHA256 tracking)
 - Scripts use `set -euo pipefail` for strict error handling
 - Scripts check for command availability before use (`command -v`)
 
 ### Secret Management
-The repository integrates with 1Password:
-- Uses `{{ onepasswordRead "op://..." }}` in templates
-- Requires 1Password CLI (`op`) and configured account
-- Example: Claude Code Context7 API key in `run_30-setup-claude.sh.tmpl`
+No template currently reads a secret. `.chezmoiscripts/run_once_before_30-setup-1password.sh.tmpl` only
+validates that `op` is installed and has an account configured.
+
+If a secret is ever needed, pull it at render time with `{{ onepasswordRead "op://..." }}` rather than
+committing it — this repo is public.
 
 ### Template Variables
 Available in all `.tmpl` files:
@@ -95,13 +105,21 @@ Available in all `.tmpl` files:
 
 ### Application Configurations
 - `dot_config/starship.toml` - Starship prompt
-- `dot_config/mise/config.toml` - Mise version manager
-- `dot_config/ghostty/config` - Ghostty terminal emulator
+- `dot_config/mise/config.toml.tmpl` - Mise version manager; `@togglhq/cli` is private-only
+- `dot_config/fish/config.fish.tmpl` - Fish shell (default shell)
+- `dot_config/nvim/` - Neovim (LazyVim)
+- `dot_config/tmux/tmux.conf` - tmux + sesh session management
+- `dot_config/ccstatusline/settings.json` - Claude Code status line
+- `dot_config/ghostty/config` - Appearance only. cmux reads this file too, so it must stay free of tmux integration (see `55879b3`)
+- `dot_config/cmux/executable_open-in-nvim` - cmux `preferredEditor` hook; opens cmd-clicked paths in the last focused nvim
 - `dot_config/private_karabiner/private_karabiner.json` - Karabiner keyboard customization
 - `private_dot_claude/settings.json` - Claude Code settings
 
 ### Git Configuration
-- `dot_gitconfig` - Git user configuration and aliases
+Git uses the XDG path; there is no `~/.gitconfig`. A stray one would silently override these,
+since git reads it *after* `~/.config/git/config`.
+- `dot_config/git/config.tmpl` - User config and aliases, with per-directory `includeIf`
+- `dot_config/git/config-work`, `config-personal` - Email overrides selected by `.machine.type`
 
 ## Development Workflow
 
@@ -124,7 +142,7 @@ Add to `Brewfile.tmpl`:
 - Machine-specific in the conditional blocks
 - Use `brew` for CLI tools, `cask` for GUI apps
 
-The `run_onchange_brew-bundle.sh.tmpl` will automatically detect changes and install new packages.
+The `.chezmoiscripts/run_onchange_before_20-setup-packages.sh.tmpl` script will automatically detect changes and install new packages.
 
 ### Adding New Dotfiles
 ```bash
@@ -136,13 +154,11 @@ chezmoi add --template ~/.newfile
 ```
 
 ### Run Scripts Execution Order
-Scripts run based on their prefix:
-- `run_once_10-*` → 10
-- `run_20-*` → 20
-- `run_30-*` → 30
-- `run_once_after_*` → runs after all other scripts
+`before_` vs `after_` decides the phase; the number only orders scripts within a phase:
+- `run_once_before_<N>-*` → before files are applied, in numeric order
+- `run_once_after_<N>-*` → after files are applied, in numeric order
 
-Number your scripts to control execution order.
+So `run_once_after_22-*` runs *later* than `run_once_before_30-*`. Pick the phase first, then the number.
 
 ## Script Output Standard
 
