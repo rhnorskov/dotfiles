@@ -67,7 +67,8 @@ function iwt --description "Fuzzy pick git worktrees, then delete them"
         fzf --read0 --print0 --multi --reverse --height 60% \
             --delimiter \x1f --with-nth 2 --accept-nth 1 \
             --prompt "delete worktree> " \
-            --header "tab: mark   enter: confirm" \
+            --bind "space:toggle+down" \
+            --header "space: mark   enter: confirm" \
             --preview 'command git -C {1} status --short --branch 2>/dev/null | head -n 30; command git -C {1} log -1 --oneline 2>/dev/null' |
         string split0)
     test (count $targets) -eq 0; and return

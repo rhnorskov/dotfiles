@@ -20,7 +20,8 @@ function irm --description "Fuzzy pick files/dirs, then move them to the trash"
     set -l targets (printf '%s\0' $entries |
         fzf --read0 --print0 --multi --reverse --height 60% \
             --prompt "delete> " \
-            --header "tab: mark   enter: confirm" \
+            --bind "space:toggle+down" \
+            --header "space: mark   enter: confirm" \
             --preview 'test -d {} && ls -lAhF {} || head -n 200 {} 2>/dev/null || file {}' |
         string split0)
     test (count $targets) -eq 0; and return
