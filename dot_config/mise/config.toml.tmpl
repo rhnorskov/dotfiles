@@ -13,6 +13,9 @@ uv = "latest"
 "npm:npkill" = "latest"
 "npm:npm-check-updates" = "latest"
 "npm:sort-package-json" = "latest"
+{{- if eq .machine.type "private" }}
+"npm:@togglhq/cli" = { version = "latest", trust_policy_excludes = ["skills@1.5.2"] }
+{{- end }}
 "npm:vercel" = "latest"
 
 "pypi:litellm" = { version = "latest", extras = ["proxy"] }
