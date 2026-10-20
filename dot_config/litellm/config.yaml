@@ -1,0 +1,8 @@
+# No api_key on purpose: Claude models use the subscription token Claude Code sends.
+model_list:
+  - model_name: "anthropic/*"
+    litellm_params:
+      model: "anthropic/*"
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
