@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# plist: {{ include "Library/LaunchAgents/local.litellm.plist.tmpl" | sha256sum }}
+
+set -euo pipefail
+
+domain="gui/$(id -u)"
+label="local.litellm"
+
+launchctl bootout "$domain/$label" &> /dev/null || true
+launchctl bootstrap "$domain" "$HOME/Library/LaunchAgents/$label.plist"
