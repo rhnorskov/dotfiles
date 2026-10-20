@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Runs the LiteLLM proxy with its master key from the login Keychain; launchd cannot read Keychain itself.
+set -euo pipefail
+
+LITELLM_MASTER_KEY=$(security find-generic-password -s litellm-master-key -w)
+export LITELLM_MASTER_KEY
+
+exec "$HOME/.local/share/mise/shims/litellm" \
+  --host 127.0.0.1 \
+  --port 4000 \
+  --config "$HOME/.config/litellm/config.yaml"
