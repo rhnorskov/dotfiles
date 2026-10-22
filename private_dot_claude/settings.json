@@ -1,44 +1,60 @@
 {
-	"respectGitignore": false,
-	"attribution": {
-		"commit": "",
-		"pr": "",
-		"sessionUrl": false
-	},
-	"permissions": {
-		"defaultMode": "auto"
-	},
-	"statusLine": {
-		"type": "command",
-		"command": "bunx -y ccstatusline@latest",
-		"padding": 0,
-		"refreshInterval": 10
-	},
-	"enabledPlugins": {
-		"context7@context7-marketplace": true,
-		"datadog@claude-plugins-official": true,
-		"frontend-design@claude-plugins-official": true,
-		"github@claude-plugins-official": true,
-		"mattpocock-skills@claude-plugins-official": true,
-		"rust-analyzer-lsp@claude-plugins-official": true,
-		"swift-lsp@claude-plugins-official": true,
-		"typescript-lsp@claude-plugins-official": true
-	},
-	"extraKnownMarketplaces": {
-		"context7-marketplace": {
-			"source": {
-				"source": "github",
-				"repo": "upstash/context7"
-			}
-		}
-	},
-	"ultracode": true,
-	"advisorModel": "fable",
-	"tui": "fullscreen",
-	"voice": {
-		"enabled": true,
-		"mode": "hold"
-	},
-	"skipDangerousModePermissionPrompt": true,
-	"agentPushNotifEnabled": true
+  "respectGitignore": false,
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0,
+    "refreshInterval": 10
+  },
+  "enabledPlugins": {
+    "context7@context7-marketplace": true,
+    "frontend-design@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "mattpocock-skills@claude-plugins-official": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "context7-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "upstash/context7"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "ultracode": true,
+  "advisorModel": "opus",
+  "pluginConfigs": {},
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "verbose": false,
+  "agentPushNotifEnabled": true
 }
