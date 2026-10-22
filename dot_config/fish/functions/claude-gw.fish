@@ -17,5 +17,6 @@ function claude-gw --description "Run Claude Code through the local LiteLLM prox
     # subscription token; API key variables would replace that login.
     set -lx ANTHROPIC_BASE_URL $base
     set -lx ANTHROPIC_CUSTOM_HEADERS "x-litellm-api-key: Bearer $key"
-    env -u ANTHROPIC_API_KEY -u ANTHROPIC_AUTH_TOKEN claude $argv
+    # modelPicker comes from --settings so only gateway sessions list the GPT rows.
+    env -u ANTHROPIC_API_KEY -u ANTHROPIC_AUTH_TOKEN claude --settings ~/.config/litellm/claude-gw-settings.json $argv
 end
