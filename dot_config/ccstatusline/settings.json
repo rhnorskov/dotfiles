@@ -8,39 +8,34 @@
         "color": "cyan"
       },
       {
-        "id": "2",
-        "type": "separator"
+        "id": "d6d97b3e-307e-4086-82d1-8afa298413f8",
+        "type": "thinking-effort"
       },
       {
-        "id": "3",
-        "type": "context-length",
-        "color": "brightBlack"
-      },
-      {
-        "id": "4",
-        "type": "separator"
-      },
-      {
-        "id": "5",
-        "type": "git-branch",
-        "color": "magenta"
-      },
-      {
-        "id": "6",
-        "type": "separator"
-      },
-      {
-        "id": "7",
-        "type": "git-changes",
-        "color": "yellow"
+        "id": "395e064f-4b45-4795-b371-950c5032dd1b",
+        "type": "git-worktree"
       }
     ],
-    [],
+    [
+      {
+        "id": "fc675d00-8bf8-4bbf-845f-30d6d31b452a",
+        "type": "claude-account-email"
+      },
+      {
+        "id": "ac8df783-c367-4d02-ba78-5592b8a741eb",
+        "type": "session-usage"
+      },
+      {
+        "id": "b3cd4092-b13e-4c87-8fa7-06868cb4ae7e",
+        "type": "reset-timer"
+      }
+    ],
     []
   ],
   "flexMode": "full-minus-40",
   "compactThreshold": 60,
   "colorLevel": 2,
+  "defaultPadding": " ",
   "inheritSeparatorColors": false,
   "globalBold": false,
   "gitCacheTtlSeconds": 5,
@@ -55,7 +50,12 @@
     ],
     "startCaps": [],
     "endCaps": [],
+    "theme": "dracula",
     "autoAlign": false,
     "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "auto-update",
+    "packageManager": "bun"
   }
 }
